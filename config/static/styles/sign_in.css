@@ -1,0 +1,171 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: allText;
+    src: url(../assets/clacon2.ttf);
+    font-style: normal;
+    font-weight: normal;
+}
+
+body {
+    font-family: allText;
+    min-height: 100vh;
+    display: flex;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.left_section {
+    flex: 1;
+    background: linear-gradient(to bottom, rgb(0, 0, 0), #777777);
+    color: #f5f5f5;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    font-size: 50px;
+}
+
+.right_section {
+    flex: 1;
+    background: #f5f5f5;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.top_link {
+    align-self: flex-end;
+    margin-bottom: 20px;
+}
+
+.top_link span {
+    margin-right: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+.top_link a {
+    color: #58a6ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.top_link a:hover {
+    text-decoration: underline;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.signin_form {
+    width: 100%;
+}
+
+.signin_form label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+.signin_form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    border: none;
+    background: rgba(31,35,40);
+    font-family: allText;
+    color: #f5f5f5 !important;
+}
+
+.signin_form small {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #555;
+}
+
+.continue_btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #2ea44f;
+    color: #f5f5f5;
+    border: none;
+    font-size: 18px;
+    font-family: allText;
+    cursor: pointer;
+}
+
+.continue_btn:hover {
+    background-color: #22863a;
+}
+
+.back {
+    display: block;
+    margin-top: 15px;
+}
+.back_text {
+    color: #58a6ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+.back_text:hover {
+    text-decoration: underline;
+}
+
+.very_right_section {
+    width: 10%;
+    position: relative;
+    height: 100vh;
+    flex-shrink: 0;
+}
+.gradient_overlay_right {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+}
+.gradient_overlay_right {
+    right: 0;
+    background: linear-gradient(to right, rgba(255,255,255,0), #f5f5f5);
+}
+.random_pixels {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 2;
+    background-color: #f5f5f5;
+}
+.pixel {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: rgba(31,35,40);
+    animation: growShrink 2s infinite alternate;
+}
+@keyframes growShrink {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(2);
+    }
+}

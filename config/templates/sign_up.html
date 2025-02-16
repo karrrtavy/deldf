@@ -1,0 +1,52 @@
+{% load static %}
+
+<html lang="ru">
+
+    <head>
+
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>NETCleaner. Sign up</title>
+        <link rel="icon" type="image" href="{% static 'assets/favicon.ico' %}">
+        <link rel="stylesheet" href="{% static 'styles/sign_up.css' %}">
+
+    </head>
+
+    <body>
+
+        <div class="container">
+            <div class="left_section">
+                <span class="all_text">Создайте свой аккаунт</span>
+            </div>
+
+            <div class="right_section">
+                <div class="top_link">
+                    <span>Уже есть аккаунт?</span>
+                    <a href="{% url 'sign_in' %}">Войти →</a>
+                </div>
+
+                <h2>Регистрация на NETCleaner</h2>
+
+                <form class="signup_form" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+    
+                    <button class="continue_btn" type="submit">Продолжить</button>
+
+                    <div class="back">
+                        <a href="{% url 'index' %}" class="all_text back_text">Вернуться на главную страницу</a>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="very_right_section">
+                <div class="gradient_overlay_right"></div>
+                <div class="random_pixels" id="right_pixels"></div>
+                <script src="{% static 'utils/BackgroundPixels2.js' %}"></script>
+            </div>
+        </div>
+
+    </body>
+
+</html>

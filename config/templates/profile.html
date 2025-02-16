@@ -1,0 +1,152 @@
+{% load static %}
+
+<html lang="ru">
+    <head>
+
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>NETCleaner</title>
+        <link rel="icon" type="image" href="{% static 'assets/favicon.ico' %}">
+        <link rel="stylesheet" href="{% static 'styles/base.css' %}">
+        <link rel="stylesheet" href="{% static 'styles/profile.css' %}">
+
+    </head>
+
+    <body>
+
+         <div class="random_pixels" id="left_pixels"></div>
+        <div class="gradient_overlay_left"></div>
+
+        <div class="main">
+
+            <div class="logo_size">
+                <a href="{% url 'index' %}">
+                  <span id="logo">NETCleaner</span>
+                  <script src="{% static 'utils/LogoAnimation.js' %}"></script>
+                </a>
+              </div>
+      
+              <div class="logo_size">
+                <span id="under_logo">Профиль {{ user.get_username }}</span>
+              </div>
+
+            <div class="main_content">
+                <div class="btns all_text">
+                    <span data-target="#profile" class="green animated_btn">Ваш профиль</span>
+                    <span data-target="#settings" class="green animated_btn">Настройки профиля</span>
+                    <span data-target="#datacheck" class="green animated_btn">Целостность данных</span>
+
+                    <a href="{% url 'index' %}" class="green animated_btn" >На главную</a>                    
+                    <a href="{% url 'logout' %}" class="green animated_btn">Выйти из профиля</a>
+                    
+                </div>
+
+                {% block content %}
+                <div class="content_area">
+                    <div id="profile" class="content_block active">
+
+                        <div class="user_info all_text">
+                            <div class="usr_img"><img src="{% static 'assets/user.png' %}" alt=""></div>
+
+                            <div class="priv_usr_inf">
+                                <span>Имя пользователя: {{ request.user.username }}</span>
+                                <span>Почта пользователя: {{ request.user.email }}</span>
+                                {% if profile %}
+                                <span>Фамилия: {{ profile.surname }}</span>
+                                <span>Имя: {{ profile.name }}</span>
+                                <span>Отчество: {{ profile.patronymic }}</span>
+                                <span>Город: {{ profile.city }}</span>
+                                <span>Номер телефона: {{ profile.phone_number }}</span>
+                                {% else %}
+                                <span>Фамилия: неизвестно</span>
+                                <span>Имя: неизвестно</span>
+                                <span>Отчество: неизвестно</span>
+                                <span>Город: неизвестно</span>
+                                <span>Номер телефона: неизвестно</span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="settings" class="content_block">
+                        <div class="user_info all_text">
+                            <div class="usr_img"><img src="{% static 'assets/user.png' %}" alt=""></div>
+
+                            <div class="priv_usr_inf">
+                                <span>Имя пользователя: {{ request.user.username }}</span>
+                                <span>Почта пользователя: {{ request.user.email }}</span>
+                                {% if profile %}
+                                <span>Фамилия: {{ profile.surname }}</span>
+                                <span>Имя: {{ profile.name }}</span>
+                                <span>Отчество: {{ profile.patronymic }}</span>
+                                <span>Город: {{ profile.city }}</span>
+                                <span>Номер телефона: {{ profile.phone_number }}</span>
+                                {% else %}
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <div class="form_group">
+                                        {{ form.surname.label_tag }}
+                                        {{ form.surname }}
+                                    </div>
+                                    <div class="form_group">
+                                        {{ form.name.label_tag }}
+                                        {{ form.name }}
+                                    </div>
+                                    <div class="form_group">
+                                        {{ form.patronymic.label_tag }}
+                                        {{ form.patronymic }}
+                                    </div>
+                                    <div class="form_group">
+                                        {{ form.city.label_tag }}
+                                        {{ form.city }}
+                                    </div>
+                                    <div class="form_group">
+                                        {{ form.phone_number.label_tag }}
+                                        {{ form.phone_number }}
+                                    </div>
+                                    <button class="save_btn" type="submit">Сохранить изменения</button>
+                                    {% endif %}
+
+                                    {% if form.errors %}
+                                    <ul>
+                                        {% for field, errors in form.errors.items %}
+                                            {% for error in errors %}
+                                                <li>{{ field }}: {{ error }}</li>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="datacheck" class="content_block">
+                        <div class="data_info all_text">
+                            <div class="suggestion">
+                                <span>Ваши данные могут располагаться на этих сайтах:</span>
+                                <div class="catalog">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                {% endblock %}
+
+            </div>
+            <script src="{% static 'utils/profile.js' %}"></script>
+
+        </div>
+
+      <div class="gradient_overlay_right"></div>
+      <div class="random_pixels" id="right_pixels"></div>
+      <script src="{% static 'utils/BackgroundPixels.js' %}"></script>
+
+      <!-- пароль на тестового пользователя: b5j-zST-r5b-hhP -->
+
+    </body>
+</html>

@@ -1,0 +1,138 @@
+{% load static %}
+
+<html lang="ru">
+    <head>
+
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>NETCleaner</title>
+        <link rel="icon" type="image" href="{% static 'assets/favicon.ico' %}">
+        <link rel="stylesheet" href="{% static 'styles/base.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/index.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/boxAnimation.css' %}">  
+
+    </head>
+
+    <body>
+
+      <div class="random_pixels" id="left_pixels"></div>
+      <div class="gradient_overlay_left"></div>
+
+      <div class="main">
+        <div class="logo_size">
+          <a href="{% url 'index' %}">
+            <span id="logo">NETCleaner</span>
+            <script src="{% static 'utils/LogoAnimation.js' %}"></script>
+          </a>
+        </div>
+
+        <div class="logo_size">
+          <span id="under_logo">Сервис удаления данных цифрового следа</span>
+        </div>
+
+        <div class="login_window">
+
+          {% if user.is_authenticated %}
+          <a href="{% url 'profile' %}" class="sign_in all_text button green">
+            <span class="sign_text">Профиль</span>
+          </a>
+          
+          {% else %}
+          <a href="{% url 'sign_in' %}" class="sign_in all_text button green">
+            <span class="sign_text">Войти</span>
+          </a>
+
+          <a href="{% url 'sign_up' %}" class="sign_up all_text button green">
+            <span class="sign_text">Зарегестрироваться</span>
+          </a>
+          {% endif %}
+
+        </div>
+
+        <div class="box">
+          <div id="buttons" class="button green">
+            <div class="left_box">
+              <div class="box_image">
+                <a href=""><img src="{% static 'assets/палец.png' %}" alt="" class="left_img"></a>
+              </div>
+              <div class="text_box">
+                <a href="">
+                  <span style="font-size: 32px;" class="h1_text_box">Цифровой след</span>
+                  <br>
+                  <span class="h2_text_box">Узнайте о своем цифровом присутствии в Интернете. Находите данные, которые вы оставляете в Интернете, и управляйте ими каждый раз, когда пользуетесь цифровыми сервисами. Защитите свою конфиденциальность, понимая свой интернет-след.</span>
+                </a>
+              </div>
+              <div class="text_box">
+                <a href="">
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div id="buttons" class="button green">
+            <div class="left_box">
+              <div class="box_image_2">
+                <a href="#"><img src="{% static 'assets/щит2.png' %}" alt="" class="left_img"></a>
+              </div>
+              <div class="text_box">
+                <a href="#">
+                  <span style="font-size: 32px;" class="h1_text_box">Утечка данных</span>
+                  <br>
+                  <span class="h2_text_box">Узнайте, не скомпрометированы ли ваши адрес электронной почты или пароль и насколько вы уязвимы в даркнете.</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="end_logo">
+          <span>NETCleaner</span>
+        </div>
+
+        <div class="end_main">
+
+          <div class="end_main" style="margin-top: 10px;">
+            <div class="the_general_situation all_text">
+              <span>На NETCleaner мы можем видеть все. Каждый оставляет цифровой след. NETCleaner это сервисный сайт, который облегчает своим пользователям удаление их присутствия на других сайтах. Это также сайт, который предоставляет информацию о законах о конфиденциальности во многих странах, чтобы лучше информировать пользователей об их правах в отношении конфиденциальности данных.</span>
+            </div>
+          </div>
+
+          <div class="end_info all_text">
+            <div class="table_container">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>О сервисе</th>
+                      <th>Юридическая информация</th>
+                      <th>Ресурсы</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Кто мы такие</td>
+                      <td><a href="{% url 'polit_konf' %}">Политика конфиденциальности</a></td>
+                      <td>Защита данных</td>
+                    </tr>
+                    <tr>
+                      <td>Связаться с нами</td>
+                      <td>Условия использования</td>
+                      <td>Социальные сети</td>
+                    </tr>
+                    <tr>
+                      <td>Telegram</td>
+                    </tr>
+                </tbody>
+                </table>
+                
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="gradient_overlay_right"></div>
+      <div class="random_pixels" id="right_pixels"></div>
+      <script src="{% static 'utils/BackgroundPixels.js' %}"></script>
+
+    </body>
+</html>

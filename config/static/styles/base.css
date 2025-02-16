@@ -1,0 +1,99 @@
+@font-face {
+    font-family: Logo;
+    src: url(../assets/clacon2.ttf);
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: allText;
+    src: url(../assets/clacon2.ttf);
+    font-style: normal;
+    font-weight: normal;
+}
+
+body{
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+.main {
+    width: 80%;
+    height: 100%;
+    background-color: #f5f5f5;
+}
+.gradient_overlay_left, .gradient_overlay_right {
+    position: absolute;
+    top: 0;
+    width: 10%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+.gradient_overlay_left {
+    left: 0;
+    background: linear-gradient(to left, #f5f5f5, rgba(255,255,255,0));
+}
+.gradient_overlay_right {
+    right: 0;
+    background: linear-gradient(to right, #f5f5f5, rgba(255,255,255,0));
+}
+.random_pixels {
+    position: relative;
+    width: 10%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #f5f5f5;
+}
+.pixel {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: rgba(31,35,40);
+    animation: growShrink 2s infinite alternate;
+}
+@keyframes growShrink {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(2);
+    }
+}
+a, .all_text{
+    color: rgba(31,35,40);
+    font-family: allText;
+    text-decoration: none;
+}
+
+#logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    min-height: 10vh;
+    transition: 0.3s;
+    font-size: 76px;
+    font-family: Logo;
+    color: rgba(31,35,40);
+}
+
+#under_logo{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 32px;
+    font-family: allText;
+    color: rgba(31,35,40);
+    margin-bottom: 2%;
+}
+
+.logo_size {
+    display: flex;
+    margin: auto;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+}

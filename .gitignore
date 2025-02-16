@@ -1,0 +1,5 @@
+/.venv
+/terminal.txt
+/config/app/migrations/__pycache__
+/config/config/__pycache__
+/commits.txt

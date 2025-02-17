@@ -43,7 +43,7 @@ class UserProfileForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class': 'form_control'}),
             'patronymic': forms.TextInput(attrs={'class': 'form_control'}),
             'city': forms.TextInput(attrs={'class': 'form_control'}),
-            'phone_number': forms.TextInput(attrs={'class': 'form_control'})            
+            'phone_number': forms.TextInput(attrs={'class': 'form_control', 'type': 'number'})            
         }
 
     def clean_city(self):

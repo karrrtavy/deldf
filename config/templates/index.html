@@ -33,7 +33,7 @@
         <div class="login_window">
 
           {% if user.is_authenticated %}
-          <a href="{% url 'profile' %}" class="sign_in all_text button green">
+          <a href="{% url 'profile' user.username %}" class="sign_in all_text button green">
             <span class="sign_text">Профиль</span>
           </a>
           

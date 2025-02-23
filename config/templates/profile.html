@@ -27,13 +27,13 @@
               </div>
       
               <div class="logo_size">
-                <span id="under_logo">Профиль {{ user.get_username }}</span>
+                <span id="under_logo">Профиль {{ user.username }}</span>
               </div>
 
             <div class="main_content">
                 <div class="btns all_text">
                     <span data-target="#profile" class="green animated_btn">Ваш профиль</span>
-                    <span data-target="#settings" class="green animated_btn">Настройки профиля</span>
+                    <span data-target="#settings" class="green animated_btn">Редактировать профиль</span>
                     <span data-target="#datacheck" class="green animated_btn">Целостность данных</span>
 
                     <a href="{% url 'index' %}" class="green animated_btn" >На главную</a>                    
@@ -49,14 +49,15 @@
                             <div class="usr_img"><img src="{% static 'assets/user.png' %}" alt=""></div>
 
                             <div class="priv_usr_inf">
+                                <span>ID пользователя: {{ request.user.id }}</span>
                                 <span>Имя пользователя: {{ request.user.username }}</span>
                                 <span>Почта пользователя: {{ request.user.email }}</span>
-                                {% if profile %}
-                                <span>Фамилия: {{ profile.surname }}</span>
-                                <span>Имя: {{ profile.name }}</span>
-                                <span>Отчество: {{ profile.patronymic }}</span>
-                                <span>Город: {{ profile.city }}</span>
-                                <span>Номер телефона: {{ profile.phone_number }}</span>
+                                {% if not request.profile.user %}
+                                <span>Фамилия: {{ profile.surname|default:"неизвестно" }}</span>
+                                <span>Имя: {{ profile.name|default:"неизвестно" }}</span>
+                                <span>Отчество: {{ profile.patronymic|default:"неизвестно" }}</span>
+                                <span>Город: {{ profile.city|default:"неизвестно" }}</span>
+                                <span>Номер телефона: {{ profile.phone_number|default:"неизвестно" }}</span>
                                 {% else %}
                                 <span>Фамилия: неизвестно</span>
                                 <span>Имя: неизвестно</span>
@@ -74,9 +75,10 @@
                             <div class="usr_img"><img src="{% static 'assets/user.png' %}" alt=""></div>
 
                             <div class="priv_usr_inf">
+                                <span>ID пользователя: {{ request.user.id }}</span>
                                 <span>Имя пользователя: {{ request.user.username }}</span>
                                 <span>Почта пользователя: {{ request.user.email }}</span>
-                                {% if profile %}
+                                {% if request.profile.user %}
                                 <span>Фамилия: {{ profile.surname }}</span>
                                 <span>Имя: {{ profile.name }}</span>
                                 <span>Отчество: {{ profile.patronymic }}</span>
@@ -85,27 +87,31 @@
                                 {% else %}
                                 <form method="post">
                                     {% csrf_token %}
-                                    <div class="form_group">
+                                    <div class="form_group" id="surname">
                                         {{ form.surname.label_tag }}
                                         {{ form.surname }}
                                     </div>
-                                    <div class="form_group">
+                                    <div class="form_group" id="name">
                                         {{ form.name.label_tag }}
                                         {{ form.name }}
                                     </div>
-                                    <div class="form_group">
+                                    <div class="form_group" id="patronymic">
                                         {{ form.patronymic.label_tag }}
                                         {{ form.patronymic }}
                                     </div>
-                                    <div class="form_group">
+                                    <div class="form_group" id="city">
                                         {{ form.city.label_tag }}
                                         {{ form.city }}
                                     </div>
-                                    <div class="form_group">
+                                    <div class="form_group" id="phone_number">
                                         {{ form.phone_number.label_tag }}
                                         {{ form.phone_number }}
                                     </div>
-                                    <button class="save_btn" type="submit">Сохранить изменения</button>
+                                        {% if not profile.user %}
+                                            <button class="save_btn" type="submit">Сохранить изменения</button>
+                                        {% else %}
+                                            <span>Редактирование профиля отключено.</span>
+                                        {% endif %}
                                     {% endif %}
 
                                     {% if form.errors %}
@@ -119,6 +125,7 @@
                                     {% endif %}
                                     
                                 </form>
+                                <script src="{% static 'utils/CharValidation.js' %}"></script>
                             </div>
                         </div>
                     </div>

@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from .forms import UserProfileForm
+from django.contrib.auth.models import User
+from .forms import UserProfileForm, UserRegistrationForm
 from .models import UserProfile
-from .forms import UserRegistrationForm
 
 
 
@@ -16,9 +16,6 @@ def sign_in(request):
 
 def sign_up(request):
     return render(request, "sign_up.html")
-
-def profile(request):
-    return render(request, "profile.html")
 
 def polit_konf(request):
     return render(request, "polit_konf.html")
@@ -61,44 +58,24 @@ def logout_view(request):
 
 
 @login_required
-def profile_view(request):
-    profile_exists = False
-    try:
-        profile = request.user.userprofile
-        profile_exists = True
-    except UserProfile.DoesNotExist:
-        profile = None
-
-    if request.method == 'POST':
+def profile_view(request, username):
+    user = get_object_or_404(User, username=username)
+    profile, created = UserProfile.objects.get_or_create(user=user)
+    
+    if request.method == "POST":
         form = UserProfileForm(request.POST, instance=profile)
         if form.is_valid():
             profile_instance = form.save(commit=False)
-            if not profile_exists:
-                profile_instance.user = request.user
+            profile_instance.user = user
             profile_instance.save()
-            return redirect('profile')
+            return redirect('profile', username=username)
     else:
         form = UserProfileForm(instance=profile)
 
     context = {
         'form': form,
         'profile': profile,
-        'profile_exists': profile_exists
+        'user': user,
     }
-    return render(request, 'profile.html' if profile_exists else 'profile.html', context)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return render(request, 'profile.html', context)
 # Create your views here.

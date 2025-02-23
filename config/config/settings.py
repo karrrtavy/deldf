@@ -131,4 +131,3 @@ MEDIA_ROOT = (BASE_DIR, 'static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-YANDEX_API_KEY = 'ae38445d-9488-4b05-b8a8-8c401fe42cc7'
